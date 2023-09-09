@@ -1,6 +1,7 @@
 # PROJECT .GITIGNORE
 # Database files
 files/
+.vscode/
 
 
 # PYTHON .GITIGNORE
