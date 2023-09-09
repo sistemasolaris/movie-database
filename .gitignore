@@ -1,6 +1,8 @@
 # PROJECT .GITIGNORE
 # Database files
-files/
+static/posters/
+
+# VSCode config
 .vscode/
 
 
