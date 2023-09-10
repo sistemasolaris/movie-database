@@ -6,7 +6,7 @@ function Navbar() {
     const [isNavExpanded, setIsNavExpanded] = useState(false);
 
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-slate-700 p-5">
+        <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-5">
             <a
                 href="/"
                 className="flex items-center flex-shrink-0 gap-1 text-white mr-6"
@@ -16,7 +16,7 @@ function Navbar() {
             </a>
             <div className="block lg:hidden">
                 <button
-                    className="flex items-center px-3 py-2 border rounded text-slate-400 border-slate-600 hover:text-white hover:border-white"
+                    className="flex items-center px-3 py-2 border rounded text-gray-400 border-gray-600 hover:text-white hover:border-white"
                     onClick={() => setIsNavExpanded(!isNavExpanded)}
                 >
                     <MenuIcon />
@@ -31,13 +31,13 @@ function Navbar() {
                 <div className="text-sm lg:flex-grow">
                     <a
                         href="#"
-                        className="block mt-4 lg:inline-block lg:mt-0 text-slate-400 hover:text-white mr-4"
+                        className="block mt-4 lg:inline-block lg:mt-0 text-gray-400 hover:text-white mr-4"
                     >
                         Add Movie
                     </a>
                     <a
                         href="#"
-                        className="block mt-4 lg:inline-block lg:mt-0 text-slate-400 hover:text-white mr-4"
+                        className="block mt-4 lg:inline-block lg:mt-0 text-gray-400 hover:text-white mr-4"
                     >
                         Github
                     </a>
