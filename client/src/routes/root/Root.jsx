@@ -1,6 +1,6 @@
 import Catalogue from "./Catalogue.jsx";
 
-function App() {
+function Root() {
     return (
         <>
             <Catalogue />
@@ -8,4 +8,4 @@ function App() {
     );
 }
 
-export default App;
+export default Root;
