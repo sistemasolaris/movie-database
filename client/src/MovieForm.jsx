@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import MovieCard from "./routes/root/MovieCard";
+import MovieCard from "./MovieCard";
 
 function MovieForm({ movieData, setMovieData, handleSubmit }) {
     // movieData and setMovieData are a state passed as a prop to this component

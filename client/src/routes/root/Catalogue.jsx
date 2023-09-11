@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MovieCard from "./MovieCard.jsx";
+import MovieCard from "../../MovieCard.jsx";
 
 function Catalogue() {
     const [movieList, setMovieList] = useState("");
