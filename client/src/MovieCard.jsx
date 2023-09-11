@@ -20,7 +20,7 @@ function MovieCard({ movieData, preview = false }) {
         <li className="flex flex-col gap-2 p-4 border rounded-xl shadow-lg bg-gray-50 hover:bg-zinc-100 hover:scale-105 transition-all duration-200">
             {isEdit && <Navigate to="/edit-movie/" state={movieData} />}
             <img
-                src={movieData.poster}
+                src={preview ? movieData.posterURL : movieData.poster}
                 className="rounded-xl shadow-md border border-gray-300 aspect-[2/3]"
             ></img>
             <div>
