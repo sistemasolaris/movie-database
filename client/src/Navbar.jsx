@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CameraIcon from "@mui/icons-material/Camera";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function Navbar() {
@@ -11,7 +11,7 @@ function Navbar() {
                 href="/"
                 className="flex items-center flex-shrink-0 gap-1 text-white mr-6"
             >
-                <CameraIcon />
+                <VideoLibraryIcon />
                 <span className="text-xl font-semibold">Movie Database</span>
             </a>
             <div className="block lg:hidden">
