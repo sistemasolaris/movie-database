@@ -5,18 +5,30 @@ function AddMovie() {
     const [title, setTitle] = useState("");
     const [year, setYear] = useState("");
     const [poster, setPoster] = useState("");
+    const [posterURL, setPosterURL] = useState("");
 
     function handlePosterChange(e) {
-        setPoster(URL.createObjectURL(e.target.files[0]));
+        setPoster(e.target.files[0]);
+        setPosterURL(URL.createObjectURL(e.target.files[0]));
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("poster", poster);
+        formData.append("year", year);
+
+        fetch("http://127.0.0.1:8000/api/movie/", {
+            method: "POST",
+            body: formData,
+        }).then((response) => console.log(response.json()));
     }
 
     return (
         <div className="flex justify-center items-center">
-            <form
-                action="http://127.0.0.1:8000/api/movie/"
-                method="POST"
-                className="flex flex-col gap-4 max-w-2xl w-5/6 m-4 p-6 border rounded-xl overflow-hidden"
-            >
+            <form className="flex flex-col gap-4 max-w-2xl w-5/6 m-4 p-6 border rounded-xl overflow-hidden">
                 <div className="flex flex-1 flex-wrap gap-4">
                     <div className="flex flex-1 gap-2">
                         <label htmlFor="title" className="font-bold md:text-lg">
@@ -57,7 +69,7 @@ function AddMovie() {
                 </div>
                 <div className="flex justify-center items-center">
                     <button
-                        type="submit"
+                        onClick={handleSubmit}
                         className="px-6 py-1 rounded-lg border-2 border-slate-700 font-semibold hover:border-transparent hover:bg-blue-500 hover:text-white"
                     >
                         Submit
@@ -68,7 +80,7 @@ function AddMovie() {
                     <div className="w-3/4 sm:w-2/3 md:w-1/2">
                         <MovieCard
                             id="0"
-                            poster={poster}
+                            poster={posterURL}
                             title={title}
                             year={year}
                             preview={true}
