@@ -17,14 +17,11 @@ function Catalogue() {
         <div className="flex justify-center">
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 p-8 max-w-7xl">
                 {movieList
-                    ? movieList.map((movie) => {
+                    ? movieList.map((movieData) => {
                           return (
                               <MovieCard
-                                  key={movie.id}
-                                  id={movie.id}
-                                  poster={movie.poster}
-                                  title={movie.title}
-                                  year={movie.year}
+                                  key={movieData.id}
+                                  movieData={movieData}
                               />
                           );
                       })

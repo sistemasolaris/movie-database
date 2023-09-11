@@ -73,13 +73,7 @@ function MovieForm({ movieData, setMovieData, handleSubmit }) {
             <div className="flex flex-col gap-2 items-center">
                 <span className="font-bold text-lg">Preview</span>
                 <div className="w-3/4 sm:w-2/3 md:w-1/2">
-                    <MovieCard
-                        id="0"
-                        poster={movieData.posterURL}
-                        title={movieData.title}
-                        year={movieData.year}
-                        preview={true}
-                    />
+                    <MovieCard movieData={movieData} preview={true} />
                 </div>
             </div>
         </form>

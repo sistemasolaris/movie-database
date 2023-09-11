@@ -3,9 +3,9 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function MovieCard({ id, poster, title, year, preview = false }) {
+function MovieCard({ movieData, preview = false }) {
     function handleDelete() {
-        fetch(`http://127.0.0.1:8000/api/movie/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}`, {
             method: "DELETE",
         })
             .then((response) => console.log(response.json()))
@@ -15,12 +15,12 @@ function MovieCard({ id, poster, title, year, preview = false }) {
     return (
         <li className="flex flex-col gap-2 p-4 border rounded-xl shadow-lg bg-gray-50 hover:bg-zinc-100 hover:scale-105 transition-all duration-200">
             <img
-                src={poster}
+                src={movieData.poster}
                 className="rounded-xl shadow-md border border-gray-300 aspect-[2/3]"
             ></img>
             <div>
-                <span className="font-semibold">{title}</span>
-                <p className="text-sm">{year}</p>
+                <span className="font-semibold">{movieData.title}</span>
+                <p className="text-sm">{movieData.year}</p>
             </div>
             {!preview ? (
                 <div className="flex gap-2">

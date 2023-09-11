@@ -3,6 +3,7 @@ import MovieForm from "../../MovieForm";
 
 function AddMovie() {
     const [movieData, setMovieData] = useState({
+        id: "0",
         title: "",
         year: "",
         poster: "",
