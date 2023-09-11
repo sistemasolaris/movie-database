@@ -23,7 +23,9 @@ function AddMovie() {
         fetch("http://127.0.0.1:8000/api/movie/", {
             method: "POST",
             body: formData,
-        }).then((response) => console.log(response.json()));
+        })
+            .then((response) => console.log(response.json()))
+            .then(window.location.replace("/"));
     }
 
     return (
