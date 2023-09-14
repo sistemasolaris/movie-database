@@ -1,6 +1,6 @@
-from rest_framework import generics
-from .models import Movie
-from .serializers import MovieSerializer
+from rest_framework import generics, viewsets
+from .models import Movie, WatchlistEntry
+from .serializers import MovieSerializer, WatchlistEntrySerializer
 
 
 class MovieList(generics.ListCreateAPIView):
@@ -11,3 +11,8 @@ class MovieList(generics.ListCreateAPIView):
 class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
+
+
+class WatchlistViewSet(viewsets.ModelViewSet):
+    serializer_class = WatchlistEntrySerializer
+    queryset = WatchlistEntry.objects.all()
