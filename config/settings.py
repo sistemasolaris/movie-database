@@ -63,6 +63,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
+AUTH_USER_MODEL = "api.User"
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
