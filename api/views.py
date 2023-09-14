@@ -13,6 +13,6 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
 
 
-class WatchlistViewSet(viewsets.ModelViewSet):
+class WatchlistAPI(generics.ListCreateAPIView):
     serializer_class = WatchlistEntrySerializer
     queryset = WatchlistEntry.objects.all()
