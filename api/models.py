@@ -12,4 +12,11 @@ class Movie(models.Model):
 
 
 class User(AbstractUser):
-    watchlist = models.ManyToManyField(Movie)
+    watchlist = models.ManyToManyField(
+        Movie, through="WatchlistEntry", through_fields=("user", "movie")
+    )
+
+
+class WatchlistEntry(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie = models.ForeignKey(User, on_delete=models.CASCADE)
