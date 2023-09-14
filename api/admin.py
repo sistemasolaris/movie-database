@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Movie
+from .models import User, Movie, WatchlistEntry
 
 
 class MovieAdmin(admin.ModelAdmin):
@@ -8,3 +8,4 @@ class MovieAdmin(admin.ModelAdmin):
 
 admin.site.register(User)
 admin.site.register(Movie, MovieAdmin)
+admin.site.register(WatchlistEntry)
