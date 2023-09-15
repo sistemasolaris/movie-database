@@ -13,6 +13,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "email", "username", "password")
+
+
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
