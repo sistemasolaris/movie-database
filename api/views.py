@@ -25,4 +25,7 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class WatchlistAPI(generics.ListCreateAPIView):
     serializer_class = WatchlistEntrySerializer
-    queryset = WatchlistEntry.objects.all()
+    lookup_field = "user"
+
+    def get_queryset(self):
+        return WatchlistEntry.objects.filter(user=self.kwargs["user"])
