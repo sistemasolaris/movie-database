@@ -23,7 +23,7 @@ function EditMovie() {
             formData.append("poster", movieData.poster);
         }
 
-        fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}`, {
+        fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}/`, {
             method: "PATCH",
             body: formData,
         })

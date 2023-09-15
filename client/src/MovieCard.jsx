@@ -9,7 +9,7 @@ function MovieCard({ movieData, preview = false }) {
     const [isEdit, setIsEdit] = useState(false);
 
     function handleDelete() {
-        fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}`, {
+        fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}/`, {
             method: "DELETE",
         })
             .then((response) => console.log(response.json()))
