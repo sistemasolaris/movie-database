@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Movie, User, WatchlistEntry
 
 
@@ -26,6 +27,13 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data["password"])
         user.save()
         return user
+
+    def get_tokens(self, user):
+        tokens = RefreshToken.for_user(user)
+        refresh = str(tokens)
+        access = str(tokens.access_token)
+        data = {"refresh": refresh, "access": access}
+        return data
 
 
 class MovieSerializer(serializers.ModelSerializer):
