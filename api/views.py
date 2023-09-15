@@ -1,9 +1,10 @@
-from rest_framework import generics
-from rest_framework.decorators import api_view
+from rest_framework import generics, status
+from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .models import Movie, WatchlistEntry
+from .models import User, Movie, WatchlistEntry
 from .serializers import (
     MyTokenObtainPairSerializer,
+    UserSerializer,
     MovieSerializer,
     WatchlistEntrySerializer,
 )
@@ -11,6 +12,20 @@ from .serializers import (
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+class UserView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+
+    def create(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            user = User.objects.get(username=request.data["username"])
+            tokens = serializer.get_tokens(user)
+            return Response({"tokens": tokens, "user": serializer.data})
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MovieList(generics.ListCreateAPIView):
