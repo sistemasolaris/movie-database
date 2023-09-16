@@ -5,8 +5,19 @@ import jwt_decode from "jwt-decode";
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-    const [tokens, setTokens] = useState(null);
-    const [user, setUser] = useState(null);
+    const [tokens, setTokens] = useState(() => {
+        const tokensState = localStorage.getItem("TOKENS");
+        if (tokensState == null) return null;
+        return JSON.parse(tokensState);
+    });
+    const [user, setUser] = useState(() => {
+        try {
+            const userState = jwt_decode(localStorage.getItem("TOKENS"));
+            return userState;
+        } catch (error) {
+            return null;
+        }
+    });
 
     function loginUser(e) {
         e.preventDefault();
@@ -24,6 +35,7 @@ function AuthProvider({ children }) {
             const data = await response.json();
             setTokens(data);
             setUser(jwt_decode(data.access));
+            localStorage.setItem("TOKENS", JSON.stringify(data));
         });
     }
 
