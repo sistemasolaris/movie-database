@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
+import AuthContext from "./contexts/AuthContext";
 
 function Navbar() {
     const [isNavExpanded, setIsNavExpanded] = useState(false);
+    const { user } = useContext(AuthContext);
 
     return (
         <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-5">
@@ -42,24 +44,35 @@ function Navbar() {
                         Github
                     </a>
                 </div>
-                <div className="flex gap-4">
+                {user ? (
                     <button>
                         <a
                             href="#"
-                            className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none rounded bg-blue-500 text-white hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
+                            className="inline-block text-lg font-semibold tracking-wide px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
                         >
-                            Sign Up
+                            {user.username}
                         </a>
                     </button>
-                    <button>
-                        <a
-                            href="#"
-                            className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
-                        >
-                            Log In
-                        </a>
-                    </button>
-                </div>
+                ) : (
+                    <div className="flex gap-4">
+                        <button>
+                            <a
+                                href="#"
+                                className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none rounded bg-blue-500 text-white hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
+                            >
+                                Sign Up
+                            </a>
+                        </button>
+                        <button>
+                            <a
+                                href="#"
+                                className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
+                            >
+                                Log In
+                            </a>
+                        </button>
+                    </div>
+                )}
             </div>
         </nav>
     );
