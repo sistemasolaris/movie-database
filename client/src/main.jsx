@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import Navbar from "./Navbar.jsx";
 import Root from "./routes/Root.jsx";
+import Login from "./routes/Login.jsx";
 import AddMovie from "./routes/AddMovie.jsx";
 import EditMovie from "./routes/EditMovie.jsx";
 import "@fontsource/roboto";
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
+    },
+    {
+        path: "login/",
+        element: <Login />,
     },
     {
         path: "add-movie/",
