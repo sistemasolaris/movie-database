@@ -20,8 +20,8 @@ function AuthProvider({ children }) {
                 username: e.target.username.value,
                 password: e.target.password.value,
             }),
-        }).then((response) => {
-            const data = response.json();
+        }).then(async (response) => {
+            const data = await response.json();
             setTokens(data);
             setUser(jwt_decode(data.access));
         });
