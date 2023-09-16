@@ -14,10 +14,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-class UserView(generics.ListCreateAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-
+class RegisterView(generics.CreateAPIView):
     def create(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
