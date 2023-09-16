@@ -1,16 +1,13 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
-import MovieForm from "../../MovieForm";
-import { useLocation } from "react-router-dom";
+import MovieForm from "../MovieForm";
 
-function EditMovie() {
-    const location = useLocation();
+function AddMovie() {
     const [movieData, setMovieData] = useState({
-        id: location.state.id,
-        title: location.state.title,
-        year: location.state.year,
+        id: "0",
+        title: "",
+        year: "",
         poster: "",
-        posterURL: location.state.poster,
+        posterURL: "",
     });
 
     function handleSubmit(e) {
@@ -18,13 +15,11 @@ function EditMovie() {
 
         const formData = new FormData();
         formData.append("title", movieData.title);
+        formData.append("poster", movieData.poster);
         formData.append("year", movieData.year);
-        if (movieData.poster !== "") {
-            formData.append("poster", movieData.poster);
-        }
 
-        fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}/`, {
-            method: "PATCH",
+        fetch("http://127.0.0.1:8000/api/movie/", {
+            method: "POST",
             body: formData,
         })
             .then((response) => console.log(response.json()))
@@ -42,4 +37,4 @@ function EditMovie() {
     );
 }
 
-export default EditMovie;
+export default AddMovie;

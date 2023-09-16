@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
-import Root from "./routes/root/Root.jsx";
-import AddMovie from "./routes/add_movie/AddMovie.jsx";
-import EditMovie from "./routes/edit_movie/EditMovie.jsx";
+import Root from "./routes/Root.jsx";
+import AddMovie from "./routes/AddMovie.jsx";
+import EditMovie from "./routes/EditMovie.jsx";
 import "@fontsource/roboto";
 import "./index.css";
 

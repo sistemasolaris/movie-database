@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Catalogue from "../../Catalogue.jsx";
+import Catalogue from "../Catalogue.jsx";
 
 function Root() {
     const [movieList, setMovieList] = useState("");
