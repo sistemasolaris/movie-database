@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 import Navbar from "./Navbar.jsx";
 import Root from "./routes/Root.jsx";
 import AddMovie from "./routes/AddMovie.jsx";
@@ -25,7 +26,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <Navbar />
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <Navbar />
+            <RouterProvider router={router} />
+        </AuthProvider>
     </React.StrictMode>
 );
