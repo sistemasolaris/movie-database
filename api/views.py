@@ -21,7 +21,7 @@ class RegisterView(generics.CreateAPIView):
             serializer.save()
             user = User.objects.get(username=request.data["username"])
             tokens = serializer.get_tokens(user)
-            return Response({"tokens": tokens, "user": serializer.data})
+            return Response({"access": tokens["access"], "refresh": tokens["refresh"]})
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
