@@ -33,9 +33,14 @@ function AuthProvider({ children }) {
             }),
         }).then(async (response) => {
             const data = await response.json();
-            setTokens(data);
-            setUser(jwt_decode(data.access));
-            localStorage.setItem("TOKENS", JSON.stringify(data));
+            if (response.status === 200) {
+                setTokens(data);
+                setUser(jwt_decode(data.access));
+                localStorage.setItem("TOKENS", JSON.stringify(data));
+            } else {
+                console.log(data);
+                alert("Something went wrong!");
+            }
         });
     }
 
