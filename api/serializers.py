@@ -30,6 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_tokens(self, user):
         tokens = RefreshToken.for_user(user)
+        tokens["username"] = user.username
         refresh = str(tokens)
         access = str(tokens.access_token)
         data = {"refresh": refresh, "access": access}
