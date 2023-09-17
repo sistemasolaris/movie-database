@@ -19,6 +19,33 @@ function AuthProvider({ children }) {
         }
     });
 
+    function registerUser(e) {
+        e.preventDefault();
+
+        fetch("http://127.0.0.1:8000/api/signup/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: e.target.username.value,
+                password: e.target.password.value,
+                email: e.target.email.value,
+            }),
+        }).then(async (response) => {
+            const data = await response.json();
+            if (response.status === 200) {
+                console.log(data);
+                setTokens(data);
+                setUser(jwt_decode(data.access));
+                localStorage.setItem("TOKENS", JSON.stringify(data));
+            } else {
+                console.log(data);
+                alert("Something went wrong!");
+            }
+        });
+    }
+
     function loginUser(e) {
         e.preventDefault();
 
@@ -45,6 +72,7 @@ function AuthProvider({ children }) {
     }
 
     const contextData = {
+        registerUser: registerUser,
         loginUser: loginUser,
         user: user,
     };
