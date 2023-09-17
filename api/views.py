@@ -6,7 +6,7 @@ from .serializers import (
     MyTokenObtainPairSerializer,
     UserSerializer,
     MovieSerializer,
-    WatchlistEntrySerializer,
+    UserWatchlistSerializer,
 )
 
 
@@ -37,8 +37,7 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class WatchlistAPI(generics.ListCreateAPIView):
-    serializer_class = WatchlistEntrySerializer
-    lookup_field = "user"
+    serializer_class = UserWatchlistSerializer
 
     def get_queryset(self):
-        return WatchlistEntry.objects.filter(user=self.kwargs["user"])
+        return User.objects.filter(pk=self.kwargs["pk"])
