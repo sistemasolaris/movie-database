@@ -72,9 +72,17 @@ function AuthProvider({ children }) {
         });
     }
 
+    function logoutUser() {
+        setTokens(null);
+        setUser(null);
+        localStorage.removeItem("TOKENS");
+        window.location.replace("login/");
+    }
+
     const contextData = {
         registerUser: registerUser,
         loginUser: loginUser,
+        logoutUser: logoutUser,
         user: user,
     };
 
