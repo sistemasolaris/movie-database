@@ -43,6 +43,12 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "poster", "year")
 
 
+class WatchlistEntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WatchlistEntry
+        fields = ("user", "movie")
+
+
 class UserWatchlistSerializer(serializers.ModelSerializer):
     watchlist = MovieSerializer(many=True, read_only=True)
 
