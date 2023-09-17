@@ -76,7 +76,7 @@ function AuthProvider({ children }) {
         setTokens(null);
         setUser(null);
         localStorage.removeItem("TOKENS");
-        window.location.replace("login/");
+        window.location.replace("/login/");
     }
 
     const contextData = {
