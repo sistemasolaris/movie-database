@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import Navbar from "./Navbar.jsx";
 import Root from "./routes/Root.jsx";
+import Signup from "./routes/Signup.jsx";
 import Login from "./routes/Login.jsx";
 import AddMovie from "./routes/AddMovie.jsx";
 import EditMovie from "./routes/EditMovie.jsx";
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
+    },
+    {
+        path: "signup/",
+        element: <Signup />,
     },
     {
         path: "login/",
