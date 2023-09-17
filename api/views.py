@@ -36,7 +36,7 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
 
 
-class WatchlistAPI(generics.ListCreateAPIView):
+class WatchlistAPI(generics.RetrieveUpdateAPIView):
     serializer_class = UserWatchlistSerializer
 
     def get_queryset(self):
