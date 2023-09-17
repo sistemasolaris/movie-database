@@ -6,6 +6,7 @@ import Navbar from "./Navbar.jsx";
 import Root from "./routes/Root.jsx";
 import Signup from "./routes/Signup.jsx";
 import Login from "./routes/Login.jsx";
+import Profile from "./routes/Profile.jsx";
 import AddMovie from "./routes/AddMovie.jsx";
 import EditMovie from "./routes/EditMovie.jsx";
 import "@fontsource/roboto";
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: "login/",
         element: <Login />,
+    },
+    {
+        path: "profile/",
+        element: <Profile />,
     },
     {
         path: "add-movie/",

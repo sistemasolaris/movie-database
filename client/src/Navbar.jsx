@@ -47,9 +47,11 @@ function Navbar() {
                 </div>
                 {user ? (
                     <div className="flex gap-4">
-                        <button className="inline-block font-semibold tracking-wide px-4 py-2 leading-none rounded bg-blue-500 text-white hover:text-slate-700 hover:bg-white mt-4 lg:mt-0">
-                            <a href="#">{user.username}</a>
-                        </button>
+                        <a href="/profile/">
+                            <button className="inline-block font-semibold tracking-wide px-4 py-2 leading-none rounded bg-blue-500 text-white hover:text-slate-700 hover:bg-white mt-4 lg:mt-0">
+                                {user.username}
+                            </button>
+                        </a>
                         <button
                             onClick={logoutUser}
                             className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
