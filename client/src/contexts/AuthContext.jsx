@@ -35,7 +35,6 @@ function AuthProvider({ children }) {
         }).then(async (response) => {
             const data = await response.json();
             if (response.status === 200) {
-                console.log(data);
                 setTokens(data);
                 setUser(jwt_decode(data.access));
                 localStorage.setItem("TOKENS", JSON.stringify(data));
