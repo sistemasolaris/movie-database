@@ -38,6 +38,7 @@ function AuthProvider({ children }) {
                 setTokens(data);
                 setUser(jwt_decode(data.access));
                 localStorage.setItem("TOKENS", JSON.stringify(data));
+                window.location.replace("/");
             } else {
                 console.log(data);
                 alert("Something went wrong!");
@@ -63,6 +64,7 @@ function AuthProvider({ children }) {
                 setTokens(data);
                 setUser(jwt_decode(data.access));
                 localStorage.setItem("TOKENS", JSON.stringify(data));
+                window.location.replace("/");
             } else {
                 console.log(data);
                 alert("Something went wrong!");
