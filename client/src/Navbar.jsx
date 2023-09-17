@@ -59,22 +59,16 @@ function Navbar() {
                     </div>
                 ) : (
                     <div className="flex gap-4">
-                        <button>
-                            <a
-                                href="#"
-                                className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none rounded bg-blue-500 text-white hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
-                            >
+                        <a href="/signup/">
+                            <button className="inline-block font-semibold tracking-wide px-4 py-2 leading-none rounded bg-blue-500 text-white hover:text-slate-700 hover:bg-white mt-4 lg:mt-0">
                                 Sign Up
-                            </a>
-                        </button>
-                        <button>
-                            <a
-                                href="#"
-                                className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-700 hover:bg-white mt-4 lg:mt-0"
-                            >
+                            </button>
+                        </a>
+                        <a href="/login/">
+                            <button className="inline-block text-sm font-semibold tracking-wide px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-700 hover:bg-white mt-4 lg:mt-0">
                                 Log In
-                            </a>
-                        </button>
+                            </button>
+                        </a>
                     </div>
                 )}
             </div>
