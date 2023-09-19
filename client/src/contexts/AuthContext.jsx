@@ -94,6 +94,7 @@ function AuthProvider({ children }) {
         registerUser: registerUser,
         loginUser: loginUser,
         logoutUser: logoutUser,
+        setWatchlist: setWatchlist,
         user: user,
         watchlist: watchlist,
     };

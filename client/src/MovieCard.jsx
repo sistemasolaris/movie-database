@@ -8,7 +8,7 @@ import AuthContext from "./contexts/AuthContext";
 
 function MovieCard({ movieData, preview = false }) {
     const [isEdit, setIsEdit] = useState(false);
-    const { user, watchlist } = useContext(AuthContext);
+    const { user, watchlist, setWatchlist } = useContext(AuthContext);
 
     function handleAddToWatchlist() {
         fetch(`http://127.0.0.1:8000/api/watchlist/`, {
@@ -20,7 +20,9 @@ function MovieCard({ movieData, preview = false }) {
                 user: user.user_id,
                 movie: movieData.id,
             }),
-        }).then((response) => console.log(response.json()));
+        })
+            .then((response) => console.log(response.json()))
+            .then(setWatchlist([...watchlist, movieData]));
     }
 
     function handleDelete() {
