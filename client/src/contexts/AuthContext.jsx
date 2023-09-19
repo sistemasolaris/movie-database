@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext();
@@ -79,10 +79,20 @@ function AuthProvider({ children }) {
         window.location.replace("/login/");
     }
 
+    // Retrieve user watchlist
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/watchlist/${user.user_id}/`)
+            .then((response) => response.json())
+            .then((data) => {
+                setUser({ ...user, watchlist: data.watchlist });
+            });
+    }, [user]);
+
     const contextData = {
         registerUser: registerUser,
         loginUser: loginUser,
         logoutUser: logoutUser,
+        setUser: setUser,
         user: user,
     };
 
