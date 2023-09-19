@@ -1,12 +1,27 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AuthContext from "./contexts/AuthContext";
 
 function MovieCard({ movieData, preview = false }) {
     const [isEdit, setIsEdit] = useState(false);
+    const { user } = useContext(AuthContext);
+
+    function handleAddToWatchlist() {
+        fetch(`http://127.0.0.1:8000/api/watchlist/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user: user.user_id,
+                movie: movieData.id,
+            }),
+        }).then((response) => console.log(response.json()));
+    }
 
     function handleDelete() {
         fetch(`http://127.0.0.1:8000/api/movie/${movieData.id}/`, {
@@ -29,7 +44,18 @@ function MovieCard({ movieData, preview = false }) {
             </div>
             {!preview ? (
                 <div className="flex gap-2">
-                    <button className="flex-1 border rounded-xl py-1 hover:border-transparent hover:bg-blue-500 hover:text-white transition-all duration-200">
+                    <button
+                        onClick={handleAddToWatchlist}
+                        className={
+                            "flex-1 border rounded-xl py-1 transition-all duration-200 " +
+                            (user.watchlist &&
+                            user.watchlist
+                                .map((watchlist) => watchlist.id)
+                                .includes(movieData.id)
+                                ? "text-white bg-blue-500 border-transparent hover:bg-indigo-800"
+                                : "hover:border-transparent hover:bg-blue-500 hover:text-white")
+                        }
+                    >
                         <VisibilityOutlinedIcon />
                     </button>
                     <button
