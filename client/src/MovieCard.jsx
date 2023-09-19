@@ -8,7 +8,7 @@ import AuthContext from "./contexts/AuthContext";
 
 function MovieCard({ movieData, preview = false }) {
     const [isEdit, setIsEdit] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { user, watchlist } = useContext(AuthContext);
 
     function handleAddToWatchlist() {
         fetch(`http://127.0.0.1:8000/api/watchlist/`, {
@@ -48,8 +48,8 @@ function MovieCard({ movieData, preview = false }) {
                         onClick={handleAddToWatchlist}
                         className={
                             "flex-1 border rounded-xl py-1 transition-all duration-200 " +
-                            (user.watchlist &&
-                            user.watchlist
+                            (watchlist &&
+                            watchlist
                                 .map((watchlist) => watchlist.id)
                                 .includes(movieData.id)
                                 ? "text-white bg-blue-500 border-transparent hover:bg-indigo-800"

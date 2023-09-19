@@ -18,6 +18,7 @@ function AuthProvider({ children }) {
             return null;
         }
     });
+    const [watchlist, setWatchlist] = useState(null);
 
     function registerUser(e) {
         e.preventDefault();
@@ -81,10 +82,11 @@ function AuthProvider({ children }) {
 
     // Retrieve user watchlist
     useEffect(() => {
+        if (!user) return;
         fetch(`http://127.0.0.1:8000/api/watchlist/${user.user_id}/`)
             .then((response) => response.json())
             .then((data) => {
-                setUser({ ...user, watchlist: data.watchlist });
+                setWatchlist(data.watchlist);
             });
     }, [user]);
 
@@ -92,8 +94,8 @@ function AuthProvider({ children }) {
         registerUser: registerUser,
         loginUser: loginUser,
         logoutUser: logoutUser,
-        setUser: setUser,
         user: user,
+        watchlist: watchlist,
     };
 
     return (
