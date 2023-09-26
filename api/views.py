@@ -7,7 +7,6 @@ from .serializers import (
     UserSerializer,
     MovieSerializer,
     WatchlistEntrySerializer,
-    UserWatchlistSerializer,
 )
 
 
@@ -37,12 +36,13 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
 
 
-class AddToWatchlist(generics.CreateAPIView):
+class ListCreateWatchlistView(generics.ListCreateAPIView):
     serializer_class = WatchlistEntrySerializer
 
-
-class GetWatchlist(generics.RetrieveAPIView):
-    serializer_class = UserWatchlistSerializer
-
     def get_queryset(self):
-        return User.objects.filter(pk=self.kwargs["pk"])
+        return WatchlistEntry.objects.filter(user=self.kwargs["user"])
+
+
+class DestroyWatchlistDetailView(generics.DestroyAPIView):
+    serializer_class = WatchlistEntrySerializer
+    queryset = WatchlistEntry.objects.all()
