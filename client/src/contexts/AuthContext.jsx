@@ -41,7 +41,6 @@ function AuthProvider({ children }) {
                 localStorage.setItem("TOKENS", JSON.stringify(data));
                 window.location.replace("/");
             } else {
-                console.log(data);
                 alert("Something went wrong!");
             }
         });
@@ -67,7 +66,6 @@ function AuthProvider({ children }) {
                 localStorage.setItem("TOKENS", JSON.stringify(data));
                 window.location.replace("/");
             } else {
-                console.log(data);
                 alert("Something went wrong!");
             }
         });
@@ -86,15 +84,25 @@ function AuthProvider({ children }) {
         fetch(`http://127.0.0.1:8000/api/watchlist/${user.user_id}/`)
             .then((response) => response.json())
             .then((data) => {
-                setWatchlist(data.watchlist);
+                setWatchlist(data);
             });
-    }, [user]);
+    }, [user, tokens]);
+
+    function updateWatchlist() {
+        if (!user) return;
+        fetch(`http://127.0.0.1:8000/api/watchlist/${user.user_id}/`)
+            .then((response) => response.json())
+            .then((data) => {
+                setWatchlist(data);
+            });
+    }
 
     const contextData = {
         registerUser: registerUser,
         loginUser: loginUser,
         logoutUser: logoutUser,
-        setWatchlist: setWatchlist,
+        updateWatchlist: updateWatchlist,
+        tokens: tokens,
         user: user,
         watchlist: watchlist,
     };

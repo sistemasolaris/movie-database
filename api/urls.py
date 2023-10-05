@@ -9,5 +9,5 @@ urlpatterns = [
     path("movie/", MovieList.as_view()),
     path("movie/<int:pk>/", MovieDetail.as_view()),
     path("watchlist/<int:user>/", ListCreateWatchlistView.as_view()),
-    path("watchlist/<int:user>/<int:pk>/", DestroyWatchlistDetailView.as_view()),
+    path("watchlist/detail/<int:pk>/", DestroyWatchlistDetailView.as_view()),
 ]

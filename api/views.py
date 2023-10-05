@@ -1,5 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User, Movie, WatchlistEntry
 from .serializers import (
@@ -7,6 +8,7 @@ from .serializers import (
     UserSerializer,
     MovieSerializer,
     WatchlistEntrySerializer,
+    WatchlistDataSerializer,
 )
 
 
@@ -37,12 +39,28 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ListCreateWatchlistView(generics.ListCreateAPIView):
-    serializer_class = WatchlistEntrySerializer
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return WatchlistDataSerializer
+        return WatchlistEntrySerializer
 
     def get_queryset(self):
         return WatchlistEntry.objects.filter(user=self.kwargs["user"])
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
 
 class DestroyWatchlistDetailView(generics.DestroyAPIView):
     serializer_class = WatchlistEntrySerializer
     queryset = WatchlistEntry.objects.all()
+
+    def destroy(self, request, *args, **kwargs):
+        print(request.user)
+        watchlist_entry = WatchlistEntry.objects.get(pk=self.kwargs["pk"])
+        if request.user == watchlist_entry.user:
+            return super().destroy(request, *args, **kwargs)
+
+        return Response(
+            self.serializer_class.errors, status=status.HTTP_401_UNAUTHORIZED
+        )

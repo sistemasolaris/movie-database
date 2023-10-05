@@ -6,6 +6,10 @@ class MovieAdmin(admin.ModelAdmin):
     readonly_fields = ("id",)
 
 
+class WatchlistAdmin(admin.ModelAdmin):
+    readonly_fields = ("id",)
+
+
 admin.site.register(User)
 admin.site.register(Movie, MovieAdmin)
-admin.site.register(WatchlistEntry)
+admin.site.register(WatchlistEntry, WatchlistAdmin)

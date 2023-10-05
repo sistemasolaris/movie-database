@@ -8,21 +8,45 @@ import AuthContext from "./contexts/AuthContext";
 
 function MovieCard({ movieData, preview = false }) {
     const [isEdit, setIsEdit] = useState(false);
-    const { user, watchlist, setWatchlist } = useContext(AuthContext);
+    const { tokens, user, watchlist, updateWatchlist } =
+        useContext(AuthContext);
 
-    function handleAddToWatchlist() {
-        fetch(`http://127.0.0.1:8000/api/watchlist/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                user: user.user_id,
-                movie: movieData.id,
-            }),
-        })
-            .then((response) => console.log(response.json()))
-            .then(setWatchlist([...watchlist, movieData]));
+    function handleToggleFromWatchlist() {
+        if (!user || !watchlist) return;
+
+        const watchlistEntry = watchlist.find(
+            (entry) => entry.movie.id === movieData.id
+        );
+
+        // Add movie to watchlist if it isn't already in it
+        if (!watchlistEntry) {
+            fetch(`http://127.0.0.1:8000/api/watchlist/${user.user_id}/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${String(tokens.access)}`,
+                },
+                body: JSON.stringify({
+                    user: user.user_id,
+                    movie: movieData.id,
+                }),
+            })
+                .then(updateWatchlist());
+        }
+
+        // If movie is in watchlist, remove from watchlist
+        else {
+            fetch(
+                `http://127.0.0.1:8000/api/watchlist/detail/${watchlistEntry.id}/`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${String(tokens.access)}`,
+                    },
+                }
+            )
+                .then(updateWatchlist());
+        }
     }
 
     function handleDelete() {
@@ -47,12 +71,12 @@ function MovieCard({ movieData, preview = false }) {
             {!preview ? (
                 <div className="flex gap-2">
                     <button
-                        onClick={handleAddToWatchlist}
+                        onClick={handleToggleFromWatchlist}
                         className={
                             "flex-1 border rounded-xl py-1 transition-all duration-200 " +
                             (watchlist &&
                             watchlist
-                                .map((watchlist) => watchlist.id)
+                                .map((watchlist) => watchlist.movie.id)
                                 .includes(movieData.id)
                                 ? "text-white bg-blue-500 border-transparent hover:bg-indigo-800"
                                 : "hover:border-transparent hover:bg-blue-500 hover:text-white")
